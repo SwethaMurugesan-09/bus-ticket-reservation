@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #dedee1;
+        }
+
+        header {
+            background-color:rgba(22, 30, 111, 0.9);
+            color: #fff;
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(63, 75, 239, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 90px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+       
+
+        label {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #020202;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        button {
+            margin-top: 25px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: rgba(37, 38, 50, 0.9);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #11345a;
+        }
+        footer {
+            margin-top: 50px;
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%;
+  font-size: 1.2rem;
+  color: #111010;
+  font-style: italic;
+            font-weight: lighter;
+            font-family: "Sofia", sans-serif;
+            font-size: 30px;
+            text-shadow: 3px 3px 3px #b6b5b5;
+            background-color:rgba(22, 30, 111, 0.9);
+
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bus Booking System</h1>
+    </header>
+    <form action="/delete_ticket" method="POST">
+        <h1>Cancel Your Ticket</h1>
+        <label for="ticket_number"><h3>Enter Ticket Number:</h3></label>
+        <input type="text" id="ticket_number" name="ticket_number" required>
+        <button type="submit" onclick="return confirm('Are you sure? You want to delete your ticket.')">Delete Ticket</button>
+    </form>
+    <footer>
+        <h4>&copy; Thalaivi Busticket Reservation 2024</h4>
+    </footer>
+</body>
+</html>

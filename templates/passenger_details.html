@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Passenger Details</title>
+    <style>
+        .seat {
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+        }
+        .available {
+            background-color: green;
+            color: white;
+        }
+        .booked {
+            background-color: grey;
+            color: white;
+            cursor: not-allowed;
+        }
+        .tooltip {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above the seat */
+            left: 50%;
+            margin-left: -60px; /* Center the tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .seat:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+    <script>
+        function bookSeat(busId, seatNumber) {
+            window.location.href = '/registration_form/' + busId + '/' + seatNumber;
+        }
+    </script>
+</head>
+<body>
+    <h1>{{ bus[0] }} - {{ bus[1] }}</h1>
+    <h2>Available Seats</h2>
+    <div>
+        {% for seat in seats %}
+        <div class="seat {{ 'available' if seat[2] == 'available' else 'booked' }}" 
+             onclick="if('{{ seat[2] }}' === 'available') { bookSeat({{ bus_id }}, '{{ seat[0] }}'); }">
+            {{ seat[0] }}
+            <span class="tooltip">${{ seat[1] }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

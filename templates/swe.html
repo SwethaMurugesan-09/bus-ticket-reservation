@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="logo.png">
+  <title>FoodiesFav</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  color: #5f6cf9;
+  padding: 1rem 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.logo-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  max-height: 50px;
+}
+
+.heading-container {
+  flex: 2;
+}
+
+.heading-container h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap:2px;
+  align-items: center; 
+  margin: 20px 0;
+}
+
+.hero-image img {
+  margin-top: 50px;
+  border-radius: 50%; 
+width: 400px;
+height: 400px; 
+object-fit: cover;}
+
+.hero-content {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+
+.nav-container {
+  flex: 1;
+  text-align: right;
+  margin-right: 5%;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+nav ul li {
+  margin-left: 1.5rem;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color:#7756ef;
+  font-size: 1.1rem;
+}
+
+nav ul li a:hover {
+  color:#5c0303;
+}
+
+.hero {
+  text-align: center;
+  padding: 2rem 1rem;
+ /* background-color: #b6c3fb;*/
+ background-color: #333;
+}
+
+.slideshow-container {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  margin: auto;
+}
+
+.slideshow-container img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+}
+
+.hero-image {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+}
+
+.hero h2 {
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: #f6eded;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #fffcfd;
+}
+
+button {
+  position: relative;
+  padding: 12px 35px;
+  background-color: #395be3;
+  font-size: 17px;
+  font-weight: 500;
+  color: #f7e8e8;
+  border: 0px solid #07c7e4;
+  border-radius: 8px;
+  box-shadow: 0 0 0 #08d5f9;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.star-1 {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  width: 15px;
+  height: auto;
+  filter: drop-shadow(0 0 0 #06f0e8);
+  z-index: -5;
+  transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+}
+
+.star-2 {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  width: 15px;
+  height: auto;
+  filter: drop-shadow(0 0 0 #06f0e8);
+  z-index: -5;
+  transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.star-3 {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 5px;
+  height: auto;
+  filter: drop-shadow(0 0 0 #06f0e8);
+  z-index: -5;
+  transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.star-4 {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 8px;
+  height: auto;
+  filter: drop-shadow(0 0 0#06f0e8);
+  z-index: -5;
+  transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.star-5 {
+  position: absolute;
+  top: 25%;
+  left: 45%;
+  width: 15px;
+  height: auto;
+  filter: drop-shadow(0 0 0 #06f0e8);
+  z-index: -5;
+  transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.star-6 {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  width: 5px;
+  height: auto;
+  filter: drop-shadow(0 0 0 #06f0e8);
+  z-index: -5;
+  transition: all 0.8s ease;
+}
+
+button:hover {
+  background: transparent;
+  color: #00ccff;
+  box-shadow: 0 0 25px #00ccff;
+}
+
+ button:hover .star-1 {
+  position: absolute;
+  top: -80%;
+  left: -30%;
+  width: 25px;
+  height: auto;
+  filter: drop-shadow(0 0 10px #00ccff);
+  z-index: 2;
+}
+
+button:hover .star-2 {
+  position: absolute;
+  top: -25%;
+  left: 10%;
+  width: 15px;
+  height: auto;
+  filter: drop-shadow(0 0 10px #00ccff);
+  z-index: 2;
+}
+
+button:hover .star-3 {
+  position: absolute;
+  top: 55%;
+  left: 25%;
+  width: 5px;
+  height: auto;
+  filter: drop-shadow(0 0 10px#00ccff);
+  z-index: 2;
+}
+
+ button:hover .star-4 {
+  position: absolute;
+  top: 30%;
+  left: 80%;
+  width: 8px;
+  height: auto;
+  filter: drop-shadow(0 0 10px #00ccff);
+  z-index: 2;
+}
+
+ button:hover .star-5 {
+  position: absolute;
+  top: 25%;
+  left: 115%;
+  width: 15px;
+  height: auto;
+  filter: drop-shadow(0 0 10px #00ccff);
+  z-index: 2;
+}
+
+ button:hover .star-6 {
+  position: absolute;
+  top: 5%;
+  left: 60%;
+  width: 5px;
+  height: auto;
+  filter: drop-shadow(0 0 10px #00ccff);
+  z-index: 2;
+}
+
+.fil0 {
+  fill: #00ccff;
+}
+
+.about {
+  background-color: #f4f4f4;
+  padding: 3rem 4rem;
+  text-align: center;
+}
+
+footer {
+  background-color:#f7ecda;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.2rem;
+  color: #000000;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.flex-item {
+  background-color: #f2f2f2;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 10px;
+  padding: 15px;
+  width: 25%; 
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.flex-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.flex-item:hover {
+  transform: scale(1.05);
+}
+
+.flex-item:hover img {
+  transform: scale(1.1);
+}
+.flex-container .flex-item a {
+  text-decoration: none;
+}
+
+.flex-container .flex-item a:hover {
+  text-decoration: none; 
+}
+
+
+
+.flex-container {
+  display: flex;
+}
+
+ .footer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            color: rgb(241, 239, 239);
+            padding: 10px;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+            /*background-color:rgba(213, 215, 235, 0.9);*/
+            background-color: #4f4f4f;
+
+        }
+
+
+
+        footer {
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%;
+  font-size: 1.2rem;
+  color: #f5ebeb;
+            font-family: "Sofia", sans-serif;
+            font-size: 30px;
+            /*background-color:rgba(213, 215, 235, 0.9);*/
+            background-color: #4f4f4f;
+
+
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo-container">
+        <img src="/static/logo1.png" alt="FoodiesFav Logo" class="logo">
+        <div class="heading-container">
+          <h1>JourneyJoy</h1>
+        </div>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main id="home">
+    <section class="hero">
+      <div class="hero-image">
+        <img src="/static/bus1.png" alt="Delicious Food">
+      </div>
+      <div class="hero-content">
+        <h2>Discover the best travel experience</h2>
+        <p>Welcome to <span style="color:rgb(225, 165, 165)">JourneyJoy!</span> Connect end to end with people through travel. We give you the best experience in travel.
+         you all neccessary things. Let's enjoy every moment in your journey with us. </p>
+        </p>
+
+
+
+
+
+
+
+
+        <button type="button" onclick="window.location.href='/dashboard'">
+          Search your Tickets here
+          <div class="star-1">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <defs></defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="star-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <defs></defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="star-3">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <defs></defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="star-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <defs></defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="star-5">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <defs></defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="star-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              xml:space="preserve"
+              version="1.1"
+              style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+              viewBox="0 0 784.11 815.53"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <defs></defs>
+              <g id="Layer_x0020_1">
+                <metadata id="CorelCorpID_0Corel-Layer"></metadata>
+                <path
+                  class="fil0"
+                  d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"
+                ></path>
+              </g>
+            </svg>
+          </div>
+        </button>
+
+
+      </div>
+    </section>
+    <section class="about" id="about">
+      <h1>What We Offer</h1>
+      <p>Welcome to JourneyJoy, your premier destination for connecting travelers and creating unforgettable experiences. We specialize in providing seamless, end-to-end travel solutions, ensuring that every journey with us is filled with joy and comfort.</p>
+      <p>At JourneyJoy, we understand that travel is more than just moving from one place to another. It's about discovering new destinations, making memories, and enjoying every moment. That's why we offer a comprehensive range of services designed to cater to all your travel needs.</p>
+      <p>From booking your tickets to ensuring you have all the essentials for your trip, JourneyJoy is committed to making your travel experience as smooth and enjoyable as possible. Join us and let’s make every journey a joyful one!</p> <br>
+      <h1>Handpicked Collections for you</h1>
+      <section class="flex-container" id="flexContainer">
+      <div class="flex-item">
+        <a href="https://www.tamilnadutourism.tn.gov.in/destinations/kodaikanal/"><img src="/static/kodaikanal.png">
+        <p>Best places to visit in kodaikanal</p>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="https://marinabeachclub.com/en/"><img src="/static/marina.png">
+        <p>Best places to visit in Marina Beach</p>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="https://www.tamilnadutourism.tn.gov.in/destinations/ooty"><img src="/static/ooty.png">
+        <p>Best places to visit in Ooty</p>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="https://rameswaramtourism.com/"><img src="/static/kodaikanal.png">
+        <p>Best places to visit in Ramwswaram</p>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="https://www.kumaritourism.com/en/home"><img src="/static/kodaikanal.png">
+        <p>Best places to visit in kanyakumari</p>
+        </a>
+      </div>
+      <div class="flex-item">
+        <a href="https://www.tripadvisor.in/Attractions-g2282363-Activities-Pollachi_Town_Pollachi_Coimbatore_District_Tamil_Nadu.htm"><img src="/static/kodaikanal.png">
+        <p>Best places to visit in Pollachi</p>
+        </a>
+      </div>
+
+
+
+    </section>
+    </section>
+      <section class="contact" id="contact">
+        <div class="footer">
+          <div class="footer-item">
+              <h2>About Us</h2>
+              <li>Investors Relations</li>
+              <li>Contact us</li>
+              <li>Mobile version</li>
+              <li>Offers</li>
+              <li>Careers</li>
+              <li>Values</li>
+          </div>
+          <div class="footer-item">
+               <h2>Info</h2>
+              <li>T&C</li>
+              <li>Privacy policy</li>
+              <li>FAQ</li>
+              <li>Blog</li>
+              <li>Primo Bus</li>
+              <li>Insurance partner</li>
+          </div>
+          <div class="footer-item">
+              <h2>Global Sites</h2>
+              <li>India</li>
+              <li>Malayia</li>
+              <li>Singapore</li>
+              <li>Peru</li>
+              <li>Colombia</li>
+              <li>Cambodia</li>
+          </div>
+          </div>
+          <footer>
+              <h4>&copy; JourneyJoy Busticket Reservation 2024</h4>
+            </footer>
+  </div>
+    </section>
+  </main>
+
+
+  <script>
+    document.getElementById('findFoodieFix').addEventListener('click', function() {
+  document.getElementById('flexContainer').style.display = 'flex';
+});
+  </script>
+
+</body>
+</html>

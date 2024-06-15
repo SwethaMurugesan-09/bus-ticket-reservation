@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Seats</title>
+ <style>
+    #bus-seats-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px; /* Adjust based on your design */
+}
+
+.seat {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    background-color: lightgray;
+    position: relative;
+}
+
+.seat.available {
+    background-color: lightgreen;
+}
+
+.seat.unavailable {
+    background-color: gray;
+}
+
+.seat.female {
+    background-color: pink;
+}
+
+#price-tooltip {
+    position: absolute;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+ </style>>
+</head>
+<body>
+    <div id="bus-seats-container">
+        {% for seat in seats %}
+        <div class="seat {{ seat[2] }}" data-price="{{ seat[1] }}" data-seat-number="{{ seat[0] }}">
+            {{ seat[0] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div id="price-tooltip" style="display: none;"></div>
+
+    <script>document.addEventListener('DOMContentLoaded', function () {
+        const container = document.getElementById('bus-seats-container');
+        const tooltip = document.getElementById('price-tooltip');
+    
+        container.addEventListener('mouseover', function (e) {
+            if (e.target.classList.contains('seat')) {
+                const price = e.target.dataset.price;
+                tooltip.style.display = 'block';
+                tooltip.innerText = `Price: ₹${price}`;
+                tooltip.style.top = `${e.pageY + 5}px`;
+                tooltip.style.left = `${e.pageX + 5}px`;
+            }
+        });
+    
+        container.addEventListener('mouseout', function (e) {
+            if (e.target.classList.contains('seat')) {
+                tooltip.style.display = 'none';
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color:#ccc; /* Replace with your background image path */
+            background-size: cover;
+            background-position: center;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+             /* Replace with the path to your image */
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Adjust the blur effect here */
+            z-index: -1; /* Ensure the background stays behind the content */
+        }
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Light black transparent */
+            border-bottom: 1px solid #ccc;
+            color: white;
+            position: fixed; /* Make the header fixed */
+            top: 0; /* Position it at the top */
+            z-index: 1000; /* Ensure it's above other content */
+        }
+
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .breadcrumbs a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        .breadcrumbs form {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumbs form select,
+        .breadcrumbs form input[type="date"],
+        .breadcrumbs form button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        .breadcrumbs form button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .breadcrumbs form button:hover {
+            background-color: #218838;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .search-ticket-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 50px;
+        }
+
+        .search-ticket-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            right: 0; /* Align the dropdown content to the right */
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .filter-section h3 {
+            margin-top: 0;
+        }
+
+        .filter-section label {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 10px; /* Add margin at the top of each checkbox */
+        }
+
+        .bus-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+            width: calc(100% - 250px); /* Adjust width to account for sidebar */
+            margin-left: 200px; /* Adjust margin to account for sidebar width */
+            margin-top: 120px; /* Adjust margin to account for fixed header */
+        }
+
+        .bus-container {
+            background-color: rgba(0, 0, 0, 0.7); /* Light black transparent */
+            border: 1px solid #ccc;
+            padding: 30px;
+            height: 400px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+
+        .bus-container img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        .bus-container h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .bus-container p {
+            font-size: 1em;
+            color: #ccc;
+        }
+
+        .filter-section button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .filter-section button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .sidebar {
+            width: 250px;
+            position: fixed;
+            top: 100px; /* Adjust top position to leave space for header */
+            bottom: 0; /* Expand it to the bottom of the viewport */
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.7); /* Light black transparent */
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            color: white;
+            overflow-y: auto; /* Ensure scrollable content */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="breadcrumbs">
+            <a href="/"><h3>Home ></h3></a>
+            <form method="get" action="{{ url_for('search') }}" class="search-form">
+                <select name="destination" required>
+                    <option value="Tirunelveli" {% if destination == 'Tirunelveli' %}selected{% endif %}>Tirunelveli</option>
+                    <option value="Vellore" {% if destination == 'Vellore' %}selected{% endif %}>Vellore</option>
+                    <option value="Thoothukudi" {% if destination == 'Thoothukudi' %}selected{% endif %}>Thoothukudi</option>
+                    <option value="Erode" {% if destination == 'Erode' %}selected{% endif %}>Erode</option>
+                </select>
+                <select name="arrival" required>
+                    <option value="" disabled>Select Arrival</option>
+                    <option value="Chennai" {% if arrival == 'Chennai' %}selected{% endif %}>Chennai</option>
+                    <option value="Coimbatore" {% if arrival == 'Coimbatore' %}selected{% endif %}>Coimbatore</option>
+                    <option value="Madurai" {% if arrival == 'Madurai' %}selected{% endif %}>Madurai</option>
+                    <option value="Tiruchirappalli" {% if arrival == 'Tiruchirappalli' %}selected{% endif %}>Tiruchirappalli</option>
+                    <option value="Salem" {% if arrival == 'Salem' %}selected{% endif %}>Salem</option>
+                    <option value="Tiruppur" {% if arrival == 'Tiruppur' %}selected{% endif %}>Tiruppur</option>
+                    <option value="Erode" {% if arrival == 'Erode' %}selected{% endif %}>Erode</option>
+                </select>
+                <input type="date" name="date" value="{{ date }}" required>
+                <button type="submit">Modify Search</button>
+            </form>
+        </div>
+        <div class="dropdown">
+            <button class="search-ticket-btn">Search Ticket</button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('search_by_ticket_number') }}">Search by Ticket Number</a>
+                <a href="{{ url_for('delete_ticket') }}">Delete Ticket</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <div class="filter-section">
+            <form method="get" action="{{ url_for('search') }}">
+                <input type="hidden" name="destination" value="{{ destination }}">
+                <input type="hidden" name="arrival" value="{{ arrival }}">
+                <input type="hidden" name="date" value="{{ date }}">
+
+                <div>
+                    <h3>Departure Time</h3>
+                    <label>
+                        <input type="checkbox" name="departure_time" value="before_6_am" {% if 'before_6_am' in selected_departure_times %}checked{% endif %}>
+                        Before 6 AM
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="departure_time" value="6_am_to_12_pm" {% if '6_am_to_12_pm' in selected_departure_times %}checked{% endif %}>
+                        6 AM to 12 PM
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="departure_time" value="12_pm_to_6_pm" {% if '12_pm_to_6_pm' in selected_departure_times %}checked{% endif %}>
+                        12 PM to 6 PM
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="departure_time" value="after_6_pm" {% if 'after_6_pm' in selected_departure_times %}checked{% endif %}>
+                        After 6 PM
+                    </label><br>
+                </div>
+
+                <div>
+                    <h3>Bus Types</h3>
+                    <label>
+                        <input type="checkbox" name="bus_type" value="SEATER" {% if 'SEATER' in selected_bus_types %}checked{% endif %}>
+                        Seater
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="bus_type" value="SLEEPER" {% if 'SLEEPER' in selected_bus_types %}checked{% endif %}>
+                        Sleeper
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="bus_type" value="AC" {% if 'AC' in selected_bus_types %}checked{% endif %}>
+                        AC
+                    </label><br>
+                    <label>
+                        <input type="checkbox" name="bus_type" value="NON-AC" {% if 'NON-AC' in selected_bus_types %}checked{% endif %}>
+                        NON-AC
+                    </label><br>
+                </div>
+
+                <button type="submit">Apply Filters</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="bus-details" style="margin-top: 150px;">
+        {% for bus in data %}
+        <div class="bus-container" style="margin-left: 120px;">
+            <img src="/static/bus5.png" alt="Bus Image" onclick="location.href='/passenger_details/{{ bus[0] }}'">
+            <h2>{{ bus[1] }}</h2>
+            <p>Departure: {{ bus[4] }}</p>
+            <p>Type: {{ bus[6] }}</p>
+            <!-- Additional bus details -->
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
